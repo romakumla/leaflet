@@ -15,7 +15,6 @@ var Dark = L.tileLayer(
       '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
   }
 );
-Dark.addTo(map);
 
 var Water = L.tileLayer(
   "https://stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.{ext}",
@@ -28,8 +27,6 @@ var Water = L.tileLayer(
     ext: "jpg",
   }
 );
-Water.addTo(map);
-
 var baseMaps = {
   OSM: osm,
   Dark: Dark,
@@ -42,8 +39,23 @@ var marker1 = L.marker([27.2, 83.95]),
 
 var markers = L.layerGroup([marker1, marker2, marker3]).addTo(map);
 
+//geojson
+
+var geojson = L.geoJson(nepalData, {
+  onEachFeature: function (feature, layer) {
+    var district = feature.properties.District;
+    layer.bindPopup("district ${District");
+  },
+  style: {
+    color: "red",
+    fillColor: "yellow",
+    fillOpacity: 0.2,
+  },
+}).addTo(map);
+
 var overlayers = {
   markers: markers,
+  "geojson Layer": geojson,
 };
 
 L.control.layers(baseMaps, overlayers).addTo(map);
