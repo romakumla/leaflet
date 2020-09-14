@@ -37,7 +37,7 @@ var marker1 = L.marker([27.2, 83.95]),
   marker2 = L.marker([27.3, 83.99]),
   marker3 = L.marker([27.2, 83.96]);
 
-var markers = L.layerGroup([marker1, marker2, marker3]).addTo(map);
+var markers = L.layerGroup([marker1, marker2, marker3]);
 
 //geojson
 
